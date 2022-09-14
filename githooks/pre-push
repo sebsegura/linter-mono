@@ -2,6 +2,4 @@
 
 UNTRACKED_GO_FILES=$(git status | grep .go)
 
-[ -n "$UNTRACKED_GO_FILES" ] && { make lint; }
-
-exit 0;
+[ -n "$UNTRACKED_GO_FILES" ] && { make test; exit 1; }
