@@ -1,0 +1,12 @@
+# MacOS
+.DS_Store
+
+# JetBrains
+.idea
+
+# Coverage
+*.out
+*.html
+
+# Build
+bin

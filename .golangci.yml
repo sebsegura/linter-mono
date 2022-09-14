@@ -1,0 +1,20 @@
+run:
+  skip-dirs:
+    - test
+  skip-files:
+    - ".*\\_test\\.go$"
+  go: "1.19"
+linters:
+  disable-all: true
+  enable:
+    - revive
+    - errcheck
+    - goimports
+    - govet
+    - staticcheck
+    - gosec
+    - gocyclo
+    - decorder
+    - errname
+    - gochecknoinits
+    - goconst
