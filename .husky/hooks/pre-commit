@@ -1,7 +1,0 @@
-#!/bin/sh
-
-UNTRACKED_GO_FILES=$(git status | grep .go)
-
-[ -n "$UNTRACKED_GO_FILES" ] && { make lint; }
-
-exit 0;
