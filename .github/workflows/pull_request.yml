@@ -1,0 +1,21 @@
+name: Static check
+on:
+  push:
+    branches:
+      - main
+jobs:
+  golangci:
+    name: lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.19
+      - uses: actions/checkout@v3
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.47
+      - name: test
+        run: go test -v ./...

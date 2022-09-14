@@ -1,7 +1,8 @@
 M = $(shell printf "\033[34;1m▶\033[0m")
 
-install-hooks:
+install-hooks: hooks-check-deps
 	@husky init
+	yes | cp -r githooks/. .husky/hooks
 
 hooks-check-deps:
 	@if [ -z `which husky` ]; then \
