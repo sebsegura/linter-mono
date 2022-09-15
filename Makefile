@@ -2,6 +2,7 @@ M = $(shell printf "\033[34;1m▶\033[0m")
 
 install-hooks: hooks-check-deps
 	@husky init
+	@husky add pre-push ""
 	yes | cp -r githooks/. .husky/hooks
 
 hooks-check-deps:
