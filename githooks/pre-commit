@@ -1,7 +1,21 @@
 #!/bin/sh
 
-UNTRACKED_GO_FILES=$(git status | grep .go)
+STAGED_GO_FILES=$(git diff --cached --name-only | grep .go)
 
-[ -n "$UNTRACKED_GO_FILES" ] && { make lint; }
+# If there are no staged go files then exit
+if [ -z "$STAGED_GO_FILES" ]; then
+  exit 0
+fi
 
-exit 0;
+RED=$(tput setaf 1)
+GREEN=$(tput setaf 2)
+
+# If there are staged go files then run linter
+make lint
+if [[ $? != 0 ]]; then
+  printf "${RED}Linting failed! ${NORMAL}Please fix errors before committing.\n"
+  exit 1
+else
+ printf "${GREEN}Linting passed! ${NORMAL}Continuing to commit.\n"
+ exit 0
+fi
