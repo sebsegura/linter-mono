@@ -1,6 +1,7 @@
 #!/bin/sh
 
-UNTRACKED_GO_FILES=$(git status | grep .go)
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+DIFF_GO_FILES=$(git diff --name-only origin/$CURRENT_BRANCH | grep .go)
 
 [ -n "$UNTRACKED_GO_FILES" ] && { make test; }
 
