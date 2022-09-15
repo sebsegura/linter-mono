@@ -1,8 +1,16 @@
 #!/bin/sh
 
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+REMOTE_BRANCH=$(git ls-remote origin | grep -w $CURRENT_BRANCH)
+LAST_COMMIT=$(git rev-parse --short HEAD)
+LAST_COMMIT_GO_FILES=$(git diff-tree --no-commit-id --name-only -r $LAST_COMMIT | grep .go)
+
+if [ -z "$REMOTE_BRANCH" ]; then
+  [ -n "$LAST_COMMIT_GO_FILES" ] && { make test; exit 0; }
+fi
+
 DIFF_GO_FILES=$(git diff --name-only origin/$CURRENT_BRANCH | grep .go)
 
-[ -n "$UNTRACKED_GO_FILES" ] && { make test; }
+[ -n "$DIFF_GO_FILES" ] && { make test; }
 
 exit 0;
