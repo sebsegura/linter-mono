@@ -1,8 +1,9 @@
 name: Static check
 on:
-  push:
+  pull_request:
     branches:
       - main
+    types: [ opened, synchronize, reopened ]
 jobs:
   golangci:
     name: lint
